@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviePro.Data;
+using MoviePro.Models;
 
 namespace MoviePro.Controllers
 {
@@ -14,7 +15,7 @@ namespace MoviePro.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var allMovies = await _context.Movies.ToListAsync();
+            var allMovies = await _context.Movies.Include(n=>n.Cinema).OrderBy(n=>n.Name).ToListAsync();
 
             return View(allMovies);
         }
