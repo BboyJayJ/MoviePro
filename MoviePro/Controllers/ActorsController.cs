@@ -1,22 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviePro.Data;
+using MoviePro.Data.Services;
 
 namespace MoviePro.Controllers
 {
     public class ActorsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IActorsService _service;
 
-        public ActorsController(AppDbContext context)
+        public ActorsController(IActorsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _context.Actors.ToListAsync());
+        var data = await _service.GetAll();
+            return View(data);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }

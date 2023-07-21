@@ -1,17 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MoviePro.Data;
-
+using MoviePro.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Dbcontext configuration
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
+
+//Services configuration
+builder.Services.AddScoped<IActorsService,ActorsService>();
+
 
 var app = builder.Build();
 
