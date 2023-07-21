@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MoviePro.Data;
 using MoviePro.Data.Services;
+using MoviePro.Models;
 
 namespace MoviePro.Controllers
 {
@@ -20,9 +21,21 @@ namespace MoviePro.Controllers
             return View(data);
         }
 
+        //演員新增     
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("FullName,PictureUrl,Bio")]Actor actor)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            _service.Add(actor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
