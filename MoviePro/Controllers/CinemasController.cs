@@ -17,7 +17,7 @@ namespace MoviePro.Controllers
 		}
 		public async Task<IActionResult> Index()
         {
-			var allCinemas = await _service.GetAll();
+			var allCinemas = await _service.GetAllAsync();
 
 			return View(allCinemas);
         }
@@ -29,17 +29,24 @@ namespace MoviePro.Controllers
 		}
 		
 		[HttpPost]
-		public IActionResult Create([Bind("Name,Logo,Description")] Cinema cinema)
+		public async Task<IActionResult> Create([Bind("Name,Logo,Description")] Cinema cinema)
 		{
 			if (!ModelState.IsValid)
 			{
 				return View(cinema);
 			}
-			_service.Add(cinema);
+			await _service.AddAsync(cinema);
 			return RedirectToAction(nameof(Index));
 		}
 
-		
+		//取得電影院新增畫面
+		public async Task<IActionResult> Details(int id)
+		{
+			var CinemaDetaisl = await _service.GetByIdAsync(id);
+
+			if (CinemaDetaisl == null) return View("NotFound");
+			return View(CinemaDetaisl);
+		}
 
 
 

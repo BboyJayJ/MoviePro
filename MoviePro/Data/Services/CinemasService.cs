@@ -12,10 +12,10 @@ namespace MoviePro.Data.Services
 			_context = context;
 		}
 
-		public void Add(Cinema cinema)
+		public async Task AddAsync(Cinema cinema)
 		{
-			_context.Cinemas.Add(cinema);
-			_context.SaveChanges();
+			await _context.Cinemas.AddAsync(cinema);
+			await _context.SaveChangesAsync();
 		}
 
 		public void Delete(int id)
@@ -23,15 +23,16 @@ namespace MoviePro.Data.Services
 			throw new NotImplementedException();
 		}
 
-		public async Task <IEnumerable<Cinema>> GetAll()
+		public async Task <IEnumerable<Cinema>> GetAllAsync()
 		{
 			var result = await _context.Cinemas.ToListAsync();
 			return result;
 		}
 
-		public Cinema GetById(int id)
+		public async Task <Cinema> GetByIdAsync(int id)
 		{
-			throw new NotImplementedException();
+			var result = await _context.Cinemas.FirstOrDefaultAsync(n => n.Id ==id);
+			return result;
 		}
 
 		public Cinema Update(int id, Cinema newCinema)
