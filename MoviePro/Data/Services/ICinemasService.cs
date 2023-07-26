@@ -7,7 +7,7 @@ namespace MoviePro.Data.Services
 		Task <IEnumerable<Cinema>> GetAllAsync();
 		Task<Cinema> GetByIdAsync(int id);
 		Task AddAsync(Cinema cinema);
-		Cinema Update(int id, Cinema newCinema);
-		void Delete(int id);
+		Task<Cinema> UpdateAsync(int id, Cinema newCinema);
+		Task DeleteAsync(int id);
 	}
 }
