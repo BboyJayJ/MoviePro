@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Producer>
 
 @{
-	ViewData["Title"] = "製片人列表";
+	ViewData["Title"] = "製作人列表";
 }
 
 <div class="row">
@@ -48,4 +48,9 @@
 
 
 	</div>
+</div>
+
+<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
+	<a asp-controller="Producers" asp-action="Create" class="btn btn-success"> 
+	<i class="bi bi-plus-circle"></i> 新增製作人></a>
 </div>
