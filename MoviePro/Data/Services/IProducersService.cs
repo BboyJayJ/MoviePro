@@ -5,10 +5,10 @@ namespace MoviePro.Data.Services
 	public interface IProducersService
 	{
 		public Task <IEnumerable<Producer>> GetAllAsync();
-		Task<Producer> GetById(int id);
+		Task<Producer> GetByIdAsync(int id);
 		Task AddAsync(Producer producer);
-		Task<Producer> Update(int id,Producer newProducer);
-		Task<Producer> Delete(int id);
+		Task<Producer> UpdateAsync(int id,Producer newProducer);
+		Task DeleteAsync(int id);
 
 	}
 }

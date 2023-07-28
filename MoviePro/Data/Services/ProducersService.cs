@@ -18,9 +18,11 @@ namespace MoviePro.Data.Services
 			await _context.SaveChangesAsync();
 		}
 
-		public Task<Producer> Delete(int id)
+		public async Task DeleteAsync(int id)
 		{
-			throw new NotImplementedException();
+			var result = await _context.Producers.FirstOrDefaultAsync(n => n.Id == id);
+			_context.Remove(result);
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task <IEnumerable<Producer>> GetAllAsync()
@@ -29,14 +31,17 @@ namespace MoviePro.Data.Services
 			return result;
 		}
 
-		public Task<Producer> GetById(int id)
+		public async Task<Producer> GetByIdAsync(int id)
 		{
-			throw new NotImplementedException();
+			var result = await _context.Producers.FirstOrDefaultAsync(n => n.Id == id);
+			return result;
 		}
 
-		public Task<Producer> Update(int id, Producer newProducer)
+		public async Task<Producer> UpdateAsync(int id, Producer newProducer)
 		{
-			throw new NotImplementedException();
+			_context.Update(newProducer);
+			await _context.SaveChangesAsync();
+			return newProducer;
 		}
 	}
 }
