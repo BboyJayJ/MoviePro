@@ -1,4 +1,4 @@
-﻿namespace MoviePro.Data.Enums
+﻿namespace MoviePro.Data
 {
     public enum MovieCategroy
     {
@@ -8,5 +8,6 @@
         Documentary,
 		Horror,
 		Cartoon
+        
 	}
 }

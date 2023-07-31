@@ -1,23 +1,50 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MoviePro.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MoviePro.Data.Services;
 using MoviePro.Models;
 
 namespace MoviePro.Controllers
 {
-    public class MoviesController : Controller
+	public class MoviesController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IMoviesService _service;
 
-        public MoviesController(AppDbContext context)
+        public MoviesController(IMoviesService service)
         {
-            _context = context;
+           _service= service;
         }
         public async Task<IActionResult> Index()
         {
-            var allMovies = await _context.Movies.Include(n=>n.Cinema).OrderBy(n=>n.Name).ToListAsync();
+			var allMovies = await _service.GetAllAsync(n => n.Cinema);
+			return View(allMovies);
+		}
+		//取得新增電影畫面
+        public async Task<IActionResult> Create()
+        {
+			var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
 
-            return View(allMovies);
+			ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+			ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+			ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+			return View();
         }
-    }
+
+		[HttpPost]
+		public async Task<IActionResult> Create(NewMovieVM movie)
+		{
+			if (!ModelState.IsValid)
+			{
+				var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
+
+				ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+				ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+				ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+
+				return View(movie);
+			}
+
+			await _service.AddNewMovieAsync(movie);
+			return RedirectToAction(nameof(Index));
+		}
+	}
 }

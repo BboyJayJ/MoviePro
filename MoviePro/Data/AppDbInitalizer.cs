@@ -1,5 +1,5 @@
 ﻿using MoviePro.Controllers;
-using MoviePro.Data.Enums;
+using MoviePro.Data;
 using MoviePro.Models;
 
 
@@ -174,7 +174,7 @@ namespace MoviePro.Data
 							EndDate = DateTime.Now.AddDays(7),
 							CinemaID = 1,
 							ProducerID = 1,
-							MovieCategroy = Enums.MovieCategroy.Action
+							MovieCategroy = MovieCategroy.Action
 
 						},
 						new Movie()
@@ -187,7 +187,7 @@ namespace MoviePro.Data
 							EndDate = DateTime.Now.AddDays(10),
 							CinemaID = 3,
 							ProducerID = 3,
-							MovieCategroy =Enums.MovieCategroy.Documentary
+							MovieCategroy =MovieCategroy.Documentary
 						},
 						new Movie()
 						{
@@ -199,7 +199,7 @@ namespace MoviePro.Data
 							EndDate = DateTime.Now.AddDays(3),
 							CinemaID = 1,
 							ProducerID = 1,
-							MovieCategroy =Enums.MovieCategroy.Action
+							MovieCategroy =MovieCategroy.Action
 						},
 						new Movie()
 						{
@@ -211,7 +211,7 @@ namespace MoviePro.Data
 							EndDate = DateTime.Now.AddDays(7),
 							CinemaID = 4,
 							ProducerID = 4,
-							MovieCategroy =Enums.MovieCategroy.Horror
+							MovieCategroy =MovieCategroy.Horror
 						},
 						new Movie()
 						{
@@ -223,7 +223,7 @@ namespace MoviePro.Data
 							EndDate = DateTime.Now.AddDays(-5),
 							CinemaID = 1,
 							ProducerID = 2,
-							MovieCategroy =Enums.MovieCategroy.Documentary
+							MovieCategroy =MovieCategroy.Documentary
 						},
 						new Movie()
 						{
@@ -235,7 +235,7 @@ namespace MoviePro.Data
 							EndDate = DateTime.Now.AddDays(-2),
 							CinemaID = 1,
 							ProducerID = 3,
-							MovieCategroy =Enums.MovieCategroy.Cartoon
+							MovieCategroy =MovieCategroy.Cartoon
 						},
 						new Movie()
 						{
@@ -247,7 +247,7 @@ namespace MoviePro.Data
 							EndDate = DateTime.Now.AddDays(20),
 							CinemaID = 1,
 							ProducerID = 5,
-							MovieCategroy =Enums.MovieCategroy.Drama
+							MovieCategroy =MovieCategroy.Drama
 						}
 					});
 					context.SaveChanges();
