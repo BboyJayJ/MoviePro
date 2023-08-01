@@ -46,5 +46,12 @@ namespace MoviePro.Controllers
 			await _service.AddNewMovieAsync(movie);
 			return RedirectToAction(nameof(Index));
 		}
-	}
+
+        //取得電影詳細資料畫面
+		public async Task<IActionResult> Details(int id)
+		{
+			var movieDetails = await _service.GetMovieByIdAsync(id);
+			return View(movieDetails);
+		}
+    }
 }
