@@ -1,13 +1,9 @@
-﻿using MoviePro.Models;
+﻿using MoviePro.Data.Base;
+using MoviePro.Models;
 
 namespace MoviePro.Data.Services
 {
-	public interface ICinemasService
+	public interface ICinemasService: IEntityBaseRepository<Cinema>
 	{
-		Task <IEnumerable<Cinema>> GetAllAsync();
-		Task<Cinema> GetByIdAsync(int id);
-		Task AddAsync(Cinema cinema);
-		Task<Cinema> UpdateAsync(int id, Cinema newCinema);
-		Task DeleteAsync(int id);
 	}
 }

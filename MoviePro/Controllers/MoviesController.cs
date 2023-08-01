@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviePro.Data.Services;
 using MoviePro.Models;
@@ -52,6 +53,54 @@ namespace MoviePro.Controllers
 		{
 			var movieDetails = await _service.GetMovieByIdAsync(id);
 			return View(movieDetails);
+		}
+        //取得電影編輯畫面
+		public async Task<IActionResult> Edit(int id)
+		{
+			var movieDetails = await _service.GetMovieByIdAsync(id);
+			if (movieDetails == null) return View("NotFound");
+
+			var reponse = new NewMovieVM()
+			{
+				Id = movieDetails.Id,
+				Name = movieDetails.Name,
+				Description = movieDetails.Description,
+				Price = movieDetails.Price,
+				StartDate = movieDetails.StartDate,
+				EndDate = movieDetails.EndDate,
+				ImageURL = movieDetails.ImageURL,
+				MovieCategroy = movieDetails.MovieCategroy,
+				CinemaId = movieDetails.CinemaID,
+				ProducerId = movieDetails.ProducerID,
+				ActorIds = movieDetails.Actors_Movies.Select(n => n.ActorId).ToList(),
+			};
+
+            var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
+            ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+            ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+            ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+
+            return View(reponse);
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, NewMovieVM movie)
+		{
+			if (id != movie.Id) return View("NotFound");
+
+			if (!ModelState.IsValid)
+			{
+				var movieDropdownData = await _service.GetNewMovieDropdownsValues();
+
+				ViewBag.Cinemas = new SelectList(movieDropdownData.Cinemas, "Id", "Name");
+				ViewBag.Producers = new SelectList(movieDropdownData.Producers, "Id", "Name");
+				ViewBag.Actors = new SelectList(movieDropdownData.Actors,"Id", "Name");
+
+				return View(movie);
+			}
+
+			await _service.UpdateMovieAsync(movie);
+			return RedirectToAction(nameof(Index));
 		}
     }
 }

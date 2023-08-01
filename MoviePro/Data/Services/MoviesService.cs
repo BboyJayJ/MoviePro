@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoviePro.Data.Base;
 using MoviePro.Models;
-using MoviePro;
 using MoviePro.Data.ViewModels;
 
 namespace MoviePro.Data.Services
@@ -69,9 +68,40 @@ namespace MoviePro.Data.Services
 			return response;
 		}
 
-		public Task UpdateMovieAsync(NewMovieVM data)
+		public async Task UpdateMovieAsync(NewMovieVM data)
 		{
-			throw new NotImplementedException();
-		}
+			var dbMovie = await _context.Movies.FirstOrDefaultAsync(n=>n.Id== data.Id);
+
+			if(dbMovie != null)
+			{
+				dbMovie.Name = data.Name;
+				dbMovie.Description = data.Description;
+				dbMovie.Price= data.Price;
+				dbMovie.ImageURL= data.ImageURL;
+				dbMovie.CinemaID = dbMovie.CinemaID;
+				dbMovie.StartDate= data.StartDate;
+				dbMovie.EndDate= data.EndDate;
+				dbMovie.MovieCategroy=data.MovieCategroy;
+				dbMovie.ProducerID = dbMovie.ProducerID;
+				await _context.SaveChangesAsync();
+			}
+
+            //移除現有演員
+            var existingActorsDb = _context.Actors_Movies.Where(n=>n.MovieId == data.Id).ToList();
+			_context.Actors_Movies.RemoveRange(existingActorsDb);
+			await _context.SaveChangesAsync();
+
+			//新增電影演員
+			foreach(var actorId in data.ActorIds)
+			{
+				var newActorMovie = new Actor_Movie()
+				{
+					MovieId = data.Id,
+					ActorId = actorId
+				};
+				await _context.Actors_Movies.AddAsync(newActorMovie);
+			}
+			await _context.SaveChangesAsync();
+        }
 	}
 }
