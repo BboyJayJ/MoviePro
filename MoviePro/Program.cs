@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MoviePro.Data;
 using MoviePro.Data.Services;
+using MoviePro.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,8 @@ builder.Services.AddScoped<IActorsService,ActorsService>();
 builder.Services.AddScoped<ICinemasService, CinemasService>();
 builder.Services.AddScoped<IProducersService, ProducersService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
+
+builder.Services.AddIdentity<ApplicationUser ,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 var app = builder.Build();
 

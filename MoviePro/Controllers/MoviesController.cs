@@ -1,11 +1,14 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviePro.Data.Services;
+using MoviePro.Data.Static;
 using MoviePro.Models;
 
 namespace MoviePro.Controllers
 {
+	[Authorize(Roles = UserRoles.Admin)]
 	public class MoviesController : Controller
     {
         private readonly IMoviesService _service;
@@ -14,6 +17,8 @@ namespace MoviePro.Controllers
         {
            _service= service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
 			var allMovies = await _service.GetAllAsync(n => n.Cinema);
@@ -49,7 +54,8 @@ namespace MoviePro.Controllers
 		}
 
         //取得電影詳細資料畫面
-		public async Task<IActionResult> Details(int id)
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
 		{
 			var movieDetails = await _service.GetMovieByIdAsync(id);
 			return View(movieDetails);

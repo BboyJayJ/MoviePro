@@ -1,5 +1,7 @@
-﻿using MoviePro.Controllers;
+﻿using Microsoft.AspNetCore.Identity;
+using MoviePro.Controllers;
 using MoviePro.Data;
+using MoviePro.Data.Static;
 using MoviePro.Models;
 
 
@@ -359,5 +361,52 @@ namespace MoviePro.Data
 				}
             }
         }
-    }
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateAsyncScope())
+            {
+                //角色
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                //使用者
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                string adminUserEmail = "admin@admin.com";
+
+                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                if (adminUser == null)
+                {
+					var newAdminUser = new ApplicationUser()
+					{
+						FullName = "Admin User",
+						UserName = "admin-user",
+						Email = adminUserEmail,
+						EmailConfirmed = true,
+					};
+					await userManager.CreateAsync(newAdminUser, "Test1234!");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);				
+                }
+
+				string appUserEmail = "user@test.com";
+
+				var appUser = await userManager.FindByEmailAsync(appUserEmail);
+				if (appUser == null)
+				{
+					var newAppUser = new ApplicationUser()
+					{
+						FullName = "App user",
+						UserName = "app-user",
+						Email = appUserEmail,
+						EmailConfirmed = true,
+					};
+					await userManager.CreateAsync(newAppUser, "Test1234!");
+					await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+				}
+            }
+        }
+    }	
 }

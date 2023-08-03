@@ -21,7 +21,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                        <li class="navbar-nav-item">
-                           <a class="nav-link text-dark" asp-controller="Movies" asp-action="Index"> <i class="badge-info bi-film"></i> 電影</a>
+                           <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Index"> <i class="badge-info bi-film"></i> 電影</a>
                        </li>
 
                        <li class="nav-item dropdown"> 
@@ -39,7 +39,7 @@
                     </ul>
 
                     <form class="from-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="padding-right: 25px;">
-                        <input name="searchString" type="text" class="form-control" placehoder="搜尋電影...">
+                        <input name="searchString" type="text" class="form-control" placehoder="搜尋電影..." >
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="bi bi-search"></i> </button>
                     </form>
                 </div>
