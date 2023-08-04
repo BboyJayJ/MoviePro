@@ -50,7 +50,7 @@ app.MapControllerRoute(
 //seed database 
 
 AppDbInitalizer.Seed(app);
-
+AppDbInitalizer.SeedUsersAndRolesAsync(app).Wait();
 app.Run();
 
 
