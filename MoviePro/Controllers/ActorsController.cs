@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviePro.Data;
 using MoviePro.Data.Services;
+using MoviePro.Data.Static;
 using MoviePro.Models;
+using System.Data;
 
 namespace MoviePro.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;
@@ -15,6 +19,7 @@ namespace MoviePro.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
         var data = await _service.GetAllAsync();
@@ -37,7 +42,8 @@ namespace MoviePro.Controllers
             await _service.AddAsync(actor);
             return RedirectToAction(nameof(Index));
         }
-		//取得演員詳細資料畫面
+        //取得演員詳細資料畫面
+        [AllowAnonymous]
         public async Task<IActionResult>Details(int id)
         {
             var actorDetails = await _service.GetByIdAsync(id);

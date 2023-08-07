@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviePro.Data;
 using MoviePro.Data.Services;
+using MoviePro.Data.Static;
 using MoviePro.Models;
+using System.Data;
 
 namespace MoviePro.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class CinemasController : Controller
     {
 		
@@ -15,7 +19,8 @@ namespace MoviePro.Controllers
 		{
 			_service = service;
 		}
-		public async Task<IActionResult> Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
 			var allCinemas = await _service.GetAllAsync();
 
@@ -39,8 +44,9 @@ namespace MoviePro.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-		//取得電影院詳細資料畫面
-		public async Task<IActionResult> Details(int id)
+        //取得電影院詳細資料畫面
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
 		{
 			var CinemaDetaisl = await _service.GetByIdAsync(id);
 
