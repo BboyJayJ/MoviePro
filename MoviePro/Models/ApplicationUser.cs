@@ -6,6 +6,6 @@ namespace MoviePro.Models
     public class ApplicationUser: IdentityUser
     {
         [Display(Name ="全名")]
-        public string ? FullName { get; set; }
+        public string?  FullName { get; set; }
     }
 }

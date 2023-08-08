@@ -24,6 +24,21 @@ namespace MoviePro.Controllers
 			var allMovies = await _service.GetAllAsync(n => n.Cinema);
 			return View(allMovies);
 		}
+		//搜尋電影功能
+		[AllowAnonymous]
+		public async Task<IActionResult> Filter(string searchString)
+		{
+			var allMovies = await _service.GetAllAsync(n => n.Cinema);
+			if (!string.IsNullOrEmpty(searchString))
+			{
+				var filteredResultNew = allMovies.Where(n => string.Equals(n.Name, searchString, StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+				return View("Index", filteredResultNew);
+			}
+
+			return View("Index", allMovies);
+		}
+
 		//取得新增電影畫面
         public async Task<IActionResult> Create()
         {

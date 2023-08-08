@@ -23,6 +23,7 @@ builder.Services.AddScoped<ICinemasService, CinemasService>();
 builder.Services.AddScoped<IProducersService, ProducersService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddIdentity<ApplicationUser ,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();

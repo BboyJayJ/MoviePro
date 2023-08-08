@@ -15,22 +15,23 @@ else
 {
 	@*用戶個人資料*@
 	<div class="dropdown">
-		<button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-toggle ="dropdown"
+			<button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-bs-toggle="dropdown"
 				aria-expanded ="false">
-			<i class="bi bi-person-badge"></i> 你好 @UserManager.GetUserName(User)
+				<i class="badge-info bi-person-badge"></i> 你好 @UserManager.GetUserName(User)
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="profile-btn">
+		
+		<ul class="dropdown-menu" aria-labelledby="profile-btn">			
 			<li>
 				<a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-					<i class="bi bi-list"></i> Orders
+					<i class="badge-info bi-list"></i> 訂單
 				</a>
 			</li>
-
+			
 			@if (User.IsInRole("Admin"))
 			{
 				<li>
 					<a class="dropdown-item" asp-controller="Account" asp-action="Users">
-						<i class="bi bi-people"></i> 使用者
+						<i class="badge-info bi-people"></i> 使用者
 					</a>
 				</li>
 			}

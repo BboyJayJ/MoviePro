@@ -26,6 +26,7 @@ namespace MoviePro.Data.Base
 			EntityEntry entityEntry = _context.Entry<T>(entity);
 			entityEntry.State = EntityState.Deleted;
 			
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
@@ -50,6 +51,7 @@ namespace MoviePro.Data.Base
 		{
 			EntityEntry entityEntry = _context.Entry<T>(entity);
 			entityEntry.State= EntityState.Modified;
+			await _context.SaveChangesAsync();
 		}
 	}
 }
