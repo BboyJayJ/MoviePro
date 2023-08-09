@@ -32,6 +32,12 @@ builder.Services.AddAuthentication(options =>
 	options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireUppercase = true; // 允許密碼不包含大寫字母的
+    options.Password.RequireNonAlphanumeric = false; // 允許密碼不包含特殊符號
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -54,9 +60,16 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Movies}/{action=Index}/{id?}");
+app.UseAuthorization();
+
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Movies}/{action=Index}/{id?}");
+});
+   
 
 
 //seed database 
