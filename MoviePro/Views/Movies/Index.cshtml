@@ -29,12 +29,12 @@
                     <div class="col-md-6">
                         <div class="card-body">
                             <p class="card-text">@item.Description</p>
-                            <p class="card-text"><b>Cinema: </b>@item.Cinema.Name</p>
-                            <p class="card-text"><b>Category: </b>@item.MovieCategroy</p>
-                            <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("yyyy年 MMMM dd日 ")</p>
-                                <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("yyyy年 MMMM dd日 ")</p>
+                            <p class="card-text"><b>電影院名稱: </b>@Html.DisplayFor(model => @item.Cinema.Name)</p>
+                            <p class="card-text"><b>電影類型: </b>@Html.DisplayFor(model => @item.MovieCategroy)</p>
+                            <p class="card-text"><b>開始時間: </b>@item.StartDate.ToString("yyyy年 MMMM dd日 ")</p>
+                                <p class="card-text"><b>結束時間: </b>@item.EndDate.ToString("yyyy年 MMMM dd日 ")</p>
                             <p class="card-text ">
-                                <b>Status: </b>
+                                <b>狀態: </b>
                             @if(DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
                             {
                                 <span class="badge bg-success text-white">熱映中</span>

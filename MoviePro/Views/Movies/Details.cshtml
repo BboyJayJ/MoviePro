@@ -22,35 +22,35 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <p class="card-text">@Model.Description</p>
+                        <p class="card-text">@Html.DisplayFor(m => m.Description)</p>
                         <p class="card-text">
-                            <b>Cinema: </b>
+                            <b>電影院名稱: </b>
                             <a asp-controller="Cinemas" asp-action="Details" asp-route-id="@Model.CinemaID">
-                                @Model.Cinema.Name
+                                @Html.DisplayFor(m => m.Cinema.Name)
                             </a>
                         </p>
                         <p class="card-text">
-                            <b>Producer: </b>
+                            <b>製作人: </b>
                             <a asp-controller="Producers" asp-action="Details" asp-route-id="@Model.ProducerID">
-                                @Model.Producer.FullName
+                                @Html.DisplayFor(m => m.Producer.FullName)
                             </a>
                         </p>
-                        <p class="card-text"><b>Category: </b>@Model.MovieCategroy</p>
-                        <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("yyyy年 MMMM dd日")</p>
-                        <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("yyyy年 MMMM dd日")</p>
+                        <p class="card-text"><b>電影類型: </b>@Html.DisplayFor(m => m.MovieCategroy)</p>
+                        <p class="card-text"><b>開始時間: </b>@Model.StartDate.ToString("yyyy年 MMMM dd日")</p>
+                        <p class="card-text"><b>結束時間: </b>@Model.EndDate.ToString("yyyy年 MMMM dd日")</p>
                         <p class="card-text ">
-                            <b>Status: </b>
+                            <b>狀態: </b>
                             @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
                             {
-                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                    <span class="badge bg-success text-white">熱映中</span>
                             }
                             else if (DateTime.Now > Model.EndDate)
                             {
-                                    <span class="badge bg-danger text-white">EXPIRED</span>
+                                    <span class="badge bg-danger text-white">已到期</span>
                             }
                             else
                             {
-                                    <span class="badge bg-primary text-white">UPCOMING</span>
+                                    <span class="badge bg-primary text-white">即將推出</span>
                             }
                         </p>
                         <p class="card-text">

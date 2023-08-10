@@ -36,5 +36,11 @@ namespace MoviePro.Data
         public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Producer> Producers { get; set; }
       
+
+        //訂單資料表
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set;}
     }
 }
