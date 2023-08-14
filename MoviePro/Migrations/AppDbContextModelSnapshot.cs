@@ -178,7 +178,7 @@ namespace MoviePro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors");
+                    b.ToTable("Actors", (string)null);
                 });
 
             modelBuilder.Entity("MoviePro.Models.Actor_Movie", b =>
@@ -193,7 +193,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Actors_Movies");
+                    b.ToTable("Actors_Movies", (string)null);
                 });
 
             modelBuilder.Entity("MoviePro.Models.ApplicationUser", b =>
@@ -287,7 +287,7 @@ namespace MoviePro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas");
+                    b.ToTable("Cinemas", (string)null);
                 });
 
             modelBuilder.Entity("MoviePro.Models.Movie", b =>
@@ -331,7 +331,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("ProducerID");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movies", (string)null);
                 });
 
             modelBuilder.Entity("MoviePro.Models.Order", b =>
@@ -354,7 +354,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("MoviePro.Models.OrderItem", b =>
@@ -383,7 +383,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("MoviePro.Models.Producer", b =>
@@ -409,7 +409,7 @@ namespace MoviePro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producers");
+                    b.ToTable("Producers", (string)null);
                 });
 
             modelBuilder.Entity("MoviePro.Models.ShoppingCartItem", b =>
@@ -434,7 +434,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShoppingCartItems", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
