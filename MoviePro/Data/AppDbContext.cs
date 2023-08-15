@@ -39,8 +39,8 @@ namespace MoviePro.Data
 
         //訂單資料表
         public DbSet<Order> Order { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }      
 
-        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set;}
+        public DbSet<ShoppingCartItem1> ShoppingCartItems1 { get; set; }
     }
 }

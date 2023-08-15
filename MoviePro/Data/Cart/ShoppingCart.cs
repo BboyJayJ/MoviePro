@@ -10,7 +10,7 @@ namespace MoviePro.Data.Cart
         public AppDbContext _context { get; set; }
 
         public string ShoppingCartId { get; set;}
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public List<ShoppingCartItem1> ShoppingCartItems1 { get; set; }
 
         public ShoppingCart(AppDbContext context)
         {
@@ -30,17 +30,17 @@ namespace MoviePro.Data.Cart
 
         public void AddItemToCart(Movie movie)
         {
-            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id && n.ShoppingCartId == ShoppingCartId);
+            var shoppingCartItem = _context.ShoppingCartItems1.FirstOrDefault(n => n.Movie.Id == movie.Id && n.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null) 
             {
-                shoppingCartItem = new ShoppingCartItem()
+                shoppingCartItem = new ShoppingCartItem1()
                 {
                     ShoppingCartId = ShoppingCartId,
                     Movie = movie,
                     Amount = 1,
                 };
-                _context.ShoppingCartItems.Add(shoppingCartItem);
+                _context.ShoppingCartItems1.Add(shoppingCartItem);
             }else
             {
                 shoppingCartItem.Amount++;
@@ -49,7 +49,7 @@ namespace MoviePro.Data.Cart
         }
         public void RemoveItemFromCart(Movie movie)
         {
-            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id && ShoppingCartId== ShoppingCartId);
+            var shoppingCartItem = _context.ShoppingCartItems1.FirstOrDefault(n => n.Movie.Id == movie.Id && ShoppingCartId== ShoppingCartId);
 
             if(shoppingCartItem!= null)
             {
@@ -58,22 +58,22 @@ namespace MoviePro.Data.Cart
                     shoppingCartItem.Amount--;
                 }else
                 {
-                    _context.ShoppingCartItems.Remove(shoppingCartItem);
+                    _context.ShoppingCartItems1.Remove(shoppingCartItem);
                 }
                 _context.SaveChanges();
             }          
         }
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public List<ShoppingCartItem1> GetShoppingCartItems()
         {
-            return ShoppingCartItems ?? (ShoppingCartItems =_context.ShoppingCartItems.Where(n =>n.ShoppingCartId == ShoppingCartId).Include(n => n.Movie).ToList());
+            return ShoppingCartItems1 ?? (ShoppingCartItems1 =_context.ShoppingCartItems1.Where(n =>n.ShoppingCartId == ShoppingCartId).Include(n => n.Movie).ToList());
         }
 
-        public double GetShoppingCartTotal() => _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Select(n => n.Movie.Price * n.Amount).Sum();
+        public double GetShoppingCartTotal() => _context.ShoppingCartItems1.Where(n => n.ShoppingCartId == ShoppingCartId).Select(n => n.Movie.Price * n.Amount).Sum();
 
         public async Task ClearShoppingCartAsync()
         {
-            var item = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId== ShoppingCartId).ToListAsync();
-            _context.ShoppingCartItems.RemoveRange(item);
+            var item = await _context.ShoppingCartItems1.Where(n => n.ShoppingCartId== ShoppingCartId).ToListAsync();
+            _context.ShoppingCartItems1.RemoveRange(item);
             await _context.SaveChangesAsync();
         }
     }

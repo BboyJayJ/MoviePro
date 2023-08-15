@@ -33,7 +33,7 @@ namespace MoviePro.Controllers
         public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            _shoppingCart.ShoppingCartItems = items;
+            _shoppingCart.ShoppingCartItems1 = items;
 
             var response = new ShoppingCartVM()
             {

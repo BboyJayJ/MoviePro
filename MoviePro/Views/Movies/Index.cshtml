@@ -56,7 +56,11 @@
                             <p class="card-text">
                                 <a class="btn btn-outline-primary float-end" asp-action="Details" asp-route-id="@item.Id">
                                     <i class="bi bi-eye-fill"></i> 查看詳細資料</a>
-                                <a class="btn btn-success text-white"> <i class="bi bi-cart-plus"></i> 加到購物車(Price @item.Price.ToString("c"))</a>                                               
+                                <a class="btn btn-success text-white @((DateTime.Now > item.EndDate) ? "disabled" : "")"
+                                    asp-controller="Orders"
+                                    asp-action="AddItemToShoppingCart"
+                                    asp-route-id="@item.Id">
+                                <i class="bi bi-cart-plus"></i> 加到購物車(Price @item.Price.ToString("c"))</a>                                               
                             </p>
                         </div>
                     </div>
@@ -66,7 +70,4 @@
 	}
 </div>
 
-<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
-    <a asp-controller="Movies" asp-action="Create" class="btn btn-success"> 
-    <i class="bi bi-plus-circle"></i> 新增電影 </a>
-</div>
+@await Html.PartialAsync("_CreateItem", "Movies") 

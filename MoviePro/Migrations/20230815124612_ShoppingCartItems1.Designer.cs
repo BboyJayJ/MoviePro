@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviePro.Data;
 
@@ -11,9 +12,11 @@ using MoviePro.Data;
 namespace MoviePro.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230815124612_ShoppingCartItems1")]
+    partial class ShoppingCartItems1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,7 +181,7 @@ namespace MoviePro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors", (string)null);
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("MoviePro.Models.Actor_Movie", b =>
@@ -193,7 +196,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Actors_Movies", (string)null);
+                    b.ToTable("Actors_Movies");
                 });
 
             modelBuilder.Entity("MoviePro.Models.ApplicationUser", b =>
@@ -287,7 +290,7 @@ namespace MoviePro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas", (string)null);
+                    b.ToTable("Cinemas");
                 });
 
             modelBuilder.Entity("MoviePro.Models.Movie", b =>
@@ -331,7 +334,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("ProducerID");
 
-                    b.ToTable("Movies", (string)null);
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("MoviePro.Models.Order", b =>
@@ -354,7 +357,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("MoviePro.Models.OrderItem", b =>
@@ -383,7 +386,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("MoviePro.Models.Producer", b =>
@@ -409,7 +412,7 @@ namespace MoviePro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producers", (string)null);
+                    b.ToTable("Producers");
                 });
 
             modelBuilder.Entity("MoviePro.Models.ShoppingCartItem", b =>
@@ -434,7 +437,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("ShoppingCartItems", (string)null);
+                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("MoviePro.Models.ShoppingCartItem1", b =>
@@ -459,7 +462,7 @@ namespace MoviePro.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("ShoppingCartItems1", (string)null);
+                    b.ToTable("ShoppingCartItems1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

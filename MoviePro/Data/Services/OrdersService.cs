@@ -21,7 +21,7 @@ namespace MoviePro.Data.Services
             return orders;
         }
 
-        public async Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string EmailAddress)
+        public async Task StoreOrderAsync(List<ShoppingCartItem1> items, string userId, string EmailAddress)
         {
             var order = new Order()
             {

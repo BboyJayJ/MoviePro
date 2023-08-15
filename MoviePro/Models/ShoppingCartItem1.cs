@@ -2,7 +2,7 @@
 
 namespace MoviePro.Models
 {
-    public class ShoppingCartItem
+    public class ShoppingCartItem1
     {
         [Key]
         public int Id { get; set; }
