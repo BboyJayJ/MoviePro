@@ -55,7 +55,7 @@ namespace MoviePro.Controllers
             return RedirectToAction(nameof(ShoppingCart));
         }
 
-        public async Task<IActionResult>RemoveItemFromShppingCart(int id)
+        public async Task<IActionResult> RemoveItemFromShppingCart(int id)
         {
             var item = await _moviesService.GetMovieByIdAsync(id);
 
@@ -63,7 +63,7 @@ namespace MoviePro.Controllers
             {
                 _shoppingCart.RemoveItemFromCart(item);
             }
-            return RedirectToAction(nameof(_shoppingCart));
+            return RedirectToAction(nameof(ShoppingCart));
         }
 
         public async Task<IActionResult> CompleteOrder()

@@ -49,20 +49,20 @@ namespace MoviePro.Data.Cart
         }
         public void RemoveItemFromCart(Movie movie)
         {
-            var shoppingCartItem = _context.ShoppingCartItems1.FirstOrDefault(n => n.Movie.Id == movie.Id && ShoppingCartId== ShoppingCartId);
+            var shoppingCartItem = _context.ShoppingCartItems1.FirstOrDefault(n => n.Movie.Id == movie.Id && n.ShoppingCartId== ShoppingCartId);
 
             if(shoppingCartItem!= null)
             {
                 if(shoppingCartItem.Amount > 1)
                 {
                     shoppingCartItem.Amount--;
-                }else
+                } else
                 {
                     _context.ShoppingCartItems1.Remove(shoppingCartItem);
-                }
-                _context.SaveChanges();
-            }          
-        }
+                }              
+            }
+			_context.SaveChanges();
+		}
         public List<ShoppingCartItem1> GetShoppingCartItems()
         {
             return ShoppingCartItems1 ?? (ShoppingCartItems1 =_context.ShoppingCartItems1.Where(n =>n.ShoppingCartId == ShoppingCartId).Include(n => n.Movie).ToList());
