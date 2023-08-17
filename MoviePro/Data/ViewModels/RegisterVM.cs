@@ -13,12 +13,11 @@ namespace MoviePro.Data.ViewModels
         [Display(Name = "密碼")]
         [Required(ErrorMessage = "密碼不可為空")]
         [DataType(DataType.Password)]
-        [Compare("Password",ErrorMessage = "密碼必須包含至少一個大寫字母")]
         public string? Password { get; set; }
         [Display(Name = "確認密碼")]
         [Required(ErrorMessage = "確認密碼不可為空")]
         [DataType(DataType.Password)]
-        [Compare("Password",ErrorMessage ="密碼與確認密碼不一致")]
-        public string? ConfirmPassword { get; set; }
+        [Compare("Password",ErrorMessage ="密碼與確認密碼不一致")]		
+		public string? ConfirmPassword { get; set; }
     }
 }

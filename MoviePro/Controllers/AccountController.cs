@@ -82,10 +82,28 @@ namespace MoviePro.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);          
 
             if (newUserResponse.Succeeded)
-                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-        
+            {
+				await _userManager.AddToRoleAsync(newUser, UserRoles.User);
 
-            return View("RegisterCompleted");
+				return View("RegisterCompleted");
+			}
+            else
+            {
+				foreach (var error in newUserResponse.Errors)
+				{
+					if (error.Code == "PasswordRequiresUpper")
+					{
+						ModelState.AddModelError(string.Empty, error.Description);
+					}
+					else
+					{
+						ModelState.AddModelError(string.Empty, error.Description);
+					}
+				}
+
+				return View(registerVM); 
+			}   
+                  
         }
 
         [HttpPost]
