@@ -114,8 +114,8 @@ namespace MoviePro.Controllers
 				var movieDropdownData = await _service.GetNewMovieDropdownsValues();
 
 				ViewBag.Cinemas = new SelectList(movieDropdownData.Cinemas, "Id", "Name");
-				ViewBag.Producers = new SelectList(movieDropdownData.Producers, "Id", "Name");
-				ViewBag.Actors = new SelectList(movieDropdownData.Actors,"Id", "Name");
+				ViewBag.Producers = new SelectList(movieDropdownData.Producers, "Id", "FullName");
+				ViewBag.Actors = new SelectList(movieDropdownData.Actors,"Id", "FullName");
 
 				return View(movie);
 			}
