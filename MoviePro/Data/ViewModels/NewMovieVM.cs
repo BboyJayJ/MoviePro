@@ -25,7 +25,8 @@ namespace MoviePro.Models
 		[Required(ErrorMessage = "電影結束時間不可為空")]
 		public DateTime EndDate { get; set; }
 
-		public MovieCategroy MovieCategroy { get; set; }
+        [Display(Name = "電影類型")]
+        public MovieCategroy MovieCategroy { get; set; }
 
 		//Relationships
 		[Display(Name = "選擇演員")]
