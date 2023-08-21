@@ -78,11 +78,11 @@ namespace MoviePro.Data.Services
 				dbMovie.Description = data.Description;
 				dbMovie.Price= data.Price;
 				dbMovie.ImageURL= data.ImageURL;
-				dbMovie.CinemaID = dbMovie.CinemaID;
+				dbMovie.CinemaID = data.CinemaId;
 				dbMovie.StartDate= data.StartDate;
 				dbMovie.EndDate= data.EndDate;
 				dbMovie.MovieCategroy=data.MovieCategroy;
-				dbMovie.ProducerID = dbMovie.ProducerID;
+				dbMovie.ProducerID = data.ProducerId;
 				await _context.SaveChangesAsync();
 			}
 

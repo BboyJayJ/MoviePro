@@ -54,12 +54,12 @@ namespace MoviePro.Controllers
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
-
-        public async Task<IActionResult> RemoveItemFromShppingCart(int id)
+		
+		public async Task<IActionResult> RemoveItemFromShppingCart(int id)
         {
             var item = await _moviesService.GetMovieByIdAsync(id);
-
-            if(item != null)
+			
+			if (item != null)
             {
                 _shoppingCart.RemoveItemFromCart(item);
             }
