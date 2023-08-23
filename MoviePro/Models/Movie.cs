@@ -21,8 +21,8 @@ namespace MoviePro.Models
 		public DateTime StartDate { get; set; }
 		[Display(Name = "電影結束時間")]
 		public DateTime EndDate { get; set; }
-
-        public MovieCategroy MovieCategroy { get; set; }
+		[Display(Name = "電影類型")]
+		public MovieCategroy MovieCategroy { get; set; }
 
         public List<Actor_Movie>? Actors_Movies { get; set; }
 
