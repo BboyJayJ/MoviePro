@@ -31,7 +31,7 @@ namespace MoviePro.Controllers
 			var allMovies = await _service.GetAllAsync(n => n.Cinema);
 			if (!string.IsNullOrEmpty(searchString))
 			{
-				var filteredResultNew = allMovies.Where(n => string.Equals(n.Name, searchString, StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
+				var filteredResultNew = allMovies.Where(n => n.Name.Contains(searchString, StringComparison.CurrentCultureIgnoreCase) || (n.Description.Contains(searchString, StringComparison.CurrentCultureIgnoreCase))).ToList();
 
 				return View("Index", filteredResultNew);
 			}
