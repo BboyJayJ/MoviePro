@@ -31,11 +31,17 @@
 							@Html.DisplayFor(modelItem => item.Bio)
 						</td>
 						<td class="align-middle">
+							@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+							{
 								<a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>編輯</a>
-								<a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>詳細資料</a>
+								
+							}
+							
+							<a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>詳細資料</a>
+							@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+							{
 								<a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>刪除</a>
-
-
+							}
 						</td>
 					</tr>
 				}
@@ -50,7 +56,11 @@
 	</div>
 </div>
 
-<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
-	<a asp-controller="Actors" asp-action="Create" class="btn btn-success"> 
-	<i class="bi bi-plus-circle"></i> 新增演員 </a>
-</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+	<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
+		<a asp-controller="Actors" asp-action="Create" class="btn btn-success"> 
+		<i class="bi bi-plus-circle"></i> 新增演員 </a>
+	</div>
+}
+

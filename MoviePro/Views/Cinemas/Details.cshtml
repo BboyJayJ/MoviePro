@@ -31,8 +31,12 @@
 					</div>
 
 					<div class="form-group">
-						  <a class="btn btn-outline-success float-end" asp-action="Edit" asp-route-id="@Model.Id" >編輯</a>
-						  <a class="btn btn-outline-secondary" asp-action="Index">電影院列表</a>
+						@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+						{
+							<a class="btn btn-outline-success float-end" asp-action="Edit" asp-route-id="@Model.Id" >編輯</a>
+						}
+					
+						<a class="btn btn-outline-secondary" asp-action="Index">電影院列表</a>
 					</div>		
 			</div>
 		</div>
